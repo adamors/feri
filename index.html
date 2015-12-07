@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <style>
+      html{
+        min-height:100%;/* make sure it is at least as tall as the viewport */
+      }
+      body {
+        margin:0;
+        padding: 0;
+      }
+      audio{
+        display: none;
+      }
+      .container{
+        font-family: 'Open Sans', sans-serif;
+        position:absolute;
+        top:0;
+        bottom:0;
+        left:0;
+        right:0;
+        overflow:hidden;
+        z-index:-1;
+        background: black;
+        color: white;
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+      }
+      #text {
+        font-size: 40px;
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+      }
+      #bluuh1, #bluuh2{
+        display: none;
+        font-size: 35px;
+        color: orange;
+      }
+    </style>
+  </head>
+  <body>
+    <audio controls autoplay>
+      <source src="audio/feri.ogg" type="audio/ogg">
+      Your browser does not support the audio element.
+    </audio>
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script>
+      var text = [
+        {string:'Há ', delay:0},
+        {string:'mit ', delay:180},
+        {string:'csinálsz ', delay:180},
+        {string:'te ', delay:200},
+        {string:'Feri', delay:200},
+        {string:'iiiiiiii', delay:200},
+        {string:'iiiiiiii', delay:200},
+        {string:'iiiiiiii. ', delay:100},
+        {string:'Adj ', delay:1500},
+        {string:'egy ', delay:200},
+        {string:'kicsi ', delay:200},
+        {string:'kemény ', delay:200},
+        {string:'drogot ', delay:200},
+        {string:'embe. ', delay:200},
+        {string:"Me ", delay:1500},
+        {string:'te ', delay:200},
+        {string:'egy ', delay:200},
+        {string:'smekker ', delay:200},
+        {string:'csávó ', delay:200},
+        {string:'vagy. ', delay:200}
+      ];
+
+      var bluuh = [
+        {string:'Blöööööööö ', delay:2400},
+        {string:'Blöööööööö ', delay:0},
+      ];
+      var delay = 0;
+      text.map(function(t){
+        var $span =  $('<span />').html(t.string);
+        delay += t.delay;
+        setTimeout(function(){
+          $span.hide().appendTo('#text').fadeIn();
+        }, delay);
+      });
+      $(document).ready(function(){
+          $('#bluuh1').delay(2400).fadeIn().delay(600).fadeOut();
+          $('#bluuh2').delay(4800).fadeIn().delay(800).fadeOut();
+      });
+    </script>
+    <div class="container">
+      <div id="text"></div>
+      <div id="bluuh1">Blöööööööh</div>
+      <div id="bluuh2">Blöööööööh</div>
+    </div>
+  </body>
+</html>
