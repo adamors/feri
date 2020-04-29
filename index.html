@@ -46,7 +46,7 @@
     </style>
   </head>
   <body>
-    <audio controls autoplay id="audio-player">
+    <audio controls id="audio-player">
       <source src="audio/feri.ogg" type="audio/ogg">
       Your browser does not support the audio element.
     </audio>
@@ -79,11 +79,12 @@
         {string:'Blöööööööö ', delay:2400},
         {string:'Blöööööööö ', delay:0},
       ];
-      var delay = 0;
 
       function startPlayback(el) {
         $(el).parent().hide();
         $('#audio-player').trigger('play');
+        let delay = 0;
+        let totalTextDelay = text.map(item => item.delay).reduce((prev, next) => prev + next);
 
         text.map(function(t){
           var $span = $('<span />').html(t.string);
@@ -94,6 +95,14 @@
         });
         $('#bluuh1').delay(2400).fadeIn().delay(600).fadeOut();
         $('#bluuh2').delay(4800).fadeIn().delay(800).fadeOut();
+
+        setTimeout(function(t) {
+          $('#text').html('');
+          $('#bluuh1').hide();
+          $('#bluuh2').hide();
+          delay = 0;
+          $(el).parent().show();
+        }, totalTextDelay + 1500);
       }
     </script>
     <div class="container">
