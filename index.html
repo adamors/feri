@@ -46,7 +46,7 @@
     </style>
   </head>
   <body>
-    <audio controls autoplay>
+    <audio controls autoplay id="audio-player">
       <source src="audio/feri.ogg" type="audio/ogg">
       Your browser does not support the audio element.
     </audio>
@@ -80,19 +80,24 @@
         {string:'Blöööööööö ', delay:0},
       ];
       var delay = 0;
-      text.map(function(t){
-        var $span =  $('<span />').html(t.string);
-        delay += t.delay;
-        setTimeout(function(){
-          $span.hide().appendTo('#text').fadeIn();
-        }, delay);
-      });
-      $(document).ready(function(){
-          $('#bluuh1').delay(2400).fadeIn().delay(600).fadeOut();
-          $('#bluuh2').delay(4800).fadeIn().delay(800).fadeOut();
-      });
+
+      function startPlayback(el) {
+        $(el).parent().hide();
+        $('#audio-player').trigger('play');
+
+        text.map(function(t){
+          var $span = $('<span />').html(t.string);
+          delay += t.delay;
+          setTimeout(function(){
+            $span.hide().appendTo('#text').fadeIn();
+          }, delay);
+        });
+        $('#bluuh1').delay(2400).fadeIn().delay(600).fadeOut();
+        $('#bluuh2').delay(4800).fadeIn().delay(800).fadeOut();
+      }
     </script>
     <div class="container">
+      <div><a class="audio-button" onclick="startPlayback(this)">Start</a></div>
       <div id="text"></div>
       <div id="bluuh1">Blöööööööh</div>
       <div id="bluuh2">Blöööööööh</div>
